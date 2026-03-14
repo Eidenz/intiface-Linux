@@ -594,6 +594,23 @@ class IntifaceCentralApp extends StatelessWidget with WindowListener, TrayListen
               if (snapshot.hasData) {
                 return snapshot.data!;
               }
+              if (snapshot.hasError) {
+                return MaterialApp(
+                  title: 'Intiface Central',
+                  debugShowCheckedModeBanner: false,
+                  home: Scaffold(
+                    body: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(32.0),
+                        child: SelectableText(
+                          'Initialization error:\n${snapshot.error}\n\n${snapshot.stackTrace}',
+                          style: const TextStyle(color: Colors.red, fontSize: 14),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              }
               return const MaterialApp(
                 title: 'Intiface Central',
                 debugShowCheckedModeBanner: false,
